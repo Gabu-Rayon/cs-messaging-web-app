@@ -1,12 +1,12 @@
 @extends('layout.app')
 @section('content')
 
-   <!-- Table Start -->
+    <!-- Table Start -->
     <div class="container-fluid pt-4 px-4">
         <div class="row g-4">
-            <div class="col-lg-12 col-md-6">
+            <div class="col-lg-12 col-md-6 mt-4">
                 <div class="bg-light rounded h-100 p-4">
-                    <h6 class="mb-4">Messages</h6>
+                    <h6 class="mb-4">Unreplied Messages</h6>
                     <table class="table table-hover">
                         <thead>
                             <tr>
@@ -23,17 +23,16 @@
                                     <td>{{ $message->user_id }}</td>
                                     <td>{{ $message->message_body }}</td>
                                     <td>
-                                        @if(empty($message->response))
-                                            Not responded yet
-                                        @else
-                                            {{ $message->response }}
-                                        @endif
+                                        @if ($messages->isEmpty())
+    <p>There are no unreplied messages at the moment.</p>
+@else
+    @endif
+
                                     </td>
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
-                    
                 </div>
             </div>
         </div>

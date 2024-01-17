@@ -19,6 +19,8 @@ Route::get('/', [MessageController::class,'index'])->name('messages.index');
 
 Route::get('/messages', [MessageController::class,'messages'])->name('all.messages');
 Route::get('/agents', [MessageController::class,'agents'])->name('all.agents');
-Route::get('/replied', [MessageController::class,'replied'])->name('replied.nmessages');
+Route::get('/replied', [MessageController::class,'replied'])->name('replied.messages');
+Route::get('/waiting', [MessageController::class,'waiting'])->name('unreplied.messages');
+Route::get('/reply', [MessageController::class,'reply'])->name('reply.message');
 
 Route::post('/reply', [MessageController::class,'store'])->name('reply.store');

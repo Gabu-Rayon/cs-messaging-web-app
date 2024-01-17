@@ -54,11 +54,6 @@
             @include('components.navbar')
             <!-- Navbar End -->
 
-
-            <!-- Top-BarStart -->
-            @include('components.top-bar')
-            <!-- Top Bar End -->
-
             <!-- Widgets Start -->
 
             <main id="main">

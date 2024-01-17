@@ -19,9 +19,11 @@
             <a href="/" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
             
             <a href="/messages" class="nav-item nav-link"><i class="fa fa-envelope me-2"></i>Messages</a>
-            <a href="reply-messages" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Response</a>
+            <a href="/replied" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Responsed</a>
+            <a href="/waiting" class="nav-item nav-link"><i class="fa fa-envelope me-2"></i>Waiting Response</a>
+            <a href="/reply" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Reply Messages</a>
             <a href="/agents" class="nav-item nav-link"><i class="fa fa-users me-2"></i>Agents</a>
-                            </div>
+    </div>
     </nav>
 </div>
 <!-- Sidebar End -->

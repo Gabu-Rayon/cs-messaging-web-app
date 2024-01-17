@@ -1,7 +1,7 @@
 @extends('layout.app')
 @section('content')
 
-   <!-- Table Start -->
+    <!-- Table Start -->
     <div class="container-fluid pt-4 px-4">
         <div class="row g-4">
             <div class="col-lg-12 col-md-6">
@@ -11,30 +11,22 @@
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">First Name</th>
-                                <th scope="col">Last Name</th>
-                                <th scope="col">Email</th>
+                                <th scope="col">User Id</th>
+                                <th scope="col">Message Body</th>
+                                <th scope="col">Response</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>John</td>
-                                <td>Doe</td>
-                                <td>jhon@email.com</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>mark@email.com</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>jacob@email.com</td>
-                            </tr>
+                            @foreach($messages as $message)
+                                <tr>
+                                    <th scope="row">{{ $message->id }}</th>
+                                    <td>{{ $message->user_id }}</td>
+                                    <td>{{ $message->message_body }}</td>
+                                    <td>
+                                        {{ $message->response }}
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

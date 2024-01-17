@@ -16,11 +16,14 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach($users as $user)
                             <tr>
-                                <th scope="row">1</th>
-                                <td>John</td>
-                                <td>jhon@email.com</td>
+                                <th scope="row">{{ $user->id }}</th>
+                                <td>{{ $user->name }}</td>
+                                <td>{{ $user->email }}</td>
                             </tr>
+
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
