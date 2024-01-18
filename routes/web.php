@@ -1,5 +1,6 @@
 <?php
 
+use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MessageController;
 
@@ -14,13 +15,18 @@ use App\Http\Controllers\MessageController;
 |
 */
 
+Route::controller(MessageController::class)->group(function () {
+    Route::get('/', 'index')->name('messages.index');
+    Route::get('/messages', 'messages')->name('all.messages');
+    Route::get('/agents', 'agents')->name('all.agents');
+    Route::get('/replied', 'replied')->name('replied.messages');
+    Route::get('/waiting', 'waiting')->name('unreplied.messages');
+    Route::get('/reply{messageId}', 'reply')->name('reply.message');
 
-Route::get('/', [MessageController::class,'index'])->name('messages.index');
-
-Route::get('/messages', [MessageController::class,'messages'])->name('all.messages');
-Route::get('/agents', [MessageController::class,'agents'])->name('all.agents');
-Route::get('/replied', [MessageController::class,'replied'])->name('replied.messages');
-Route::get('/waiting', [MessageController::class,'waiting'])->name('unreplied.messages');
-Route::get('/reply', [MessageController::class,'reply'])->name('reply.message');
-
-Route::post('/reply', [MessageController::class,'store'])->name('reply.store');
+    //Agent Response routing
+    Route::post('/store/{messageId}', 'store')->name('reply.store');
+    
+    //customer messaging Routing
+    Route::get('/message', 'showForm')->name('messaging.form');
+    Route::post('/message/send', 'sendMessage')->name('send.message');
+});

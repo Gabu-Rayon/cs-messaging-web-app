@@ -14,6 +14,7 @@
                                 <th scope="col">User Id</th>
                                 <th scope="col">Message Body</th>
                                 <th scope="col">Response</th>
+                                <th scope="col">Reply</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -28,6 +29,9 @@
                                         @else
                                             {{ $message->response }}
                                         @endif
+                                    </td>
+                                    <td>
+                                       <p class="btn-holder"><a href="{{ route('reply.message', ['messageId' => $message->id]) }}" class="btn btn-primary">Reply</a> </p>                                        
                                     </td>
                                 </tr>
                             @endforeach
