@@ -27,4 +27,8 @@ Route::controller(MessageController::class)->group(function () {
     //customer messaging Routing
     Route::get('/message', 'showForm')->name('messaging.form');
     Route::post('/message/send', 'sendMessage')->name('send.message');
+    //Mark message as Urgent 
+    Route::post('/urgent', 'markAsUrgent')->name('mark.urgent');
+    //Assign Agents
+    Route::post('/urgent', 'markAsUrgent')->name('mark.urgent');
 });

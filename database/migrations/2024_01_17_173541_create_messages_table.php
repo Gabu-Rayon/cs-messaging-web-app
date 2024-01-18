@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('user_id');
             $table->text('message_body')->change();
            $table->string('response')->nullable()->change();
+           $table->string('status')->default('pending'); 
+           $table->integer('priority')->default(0);       
             $table->timestamps();
         });
     }

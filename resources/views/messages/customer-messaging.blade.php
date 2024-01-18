@@ -49,16 +49,23 @@
                 <label for="name" class="form-label">Sender Id</label>
                 <input type="text" class="form-control" id="user_id" name="user_id" placeholder="Enter Id e.g 2389">
                 @error('user_id')
-                                    <div class="text-danger"> {{ $message }} </div>
-                                @enderror
+                 <div class="text-danger"> {{ $message }} </div>
+                @enderror
               </div>
+              
               <div class="mb-3">
                 <label for="message" class="form-label">Message</label>
                 <textarea class="form-control" id="message" name="message_body" rows="3"></textarea>
                 @error('message_body')
-                                    <div class="text-danger"> {{ $message }} </div>
-                                @enderror
+                  <div class="text-danger"> {{ $message }} </div>
+               @enderror
               </div>
+
+              <div class="mb-3">
+                <label for="message" class="form-label">Response</label>
+                <textarea class="form-control" id="message" name="response" rows="3"></textarea>               
+              </div>
+
               <div class="d-flex justify-content-end">
                 <button type="submit" class="btn btn-primary" name="send_message">Send Message</button>
             </div>

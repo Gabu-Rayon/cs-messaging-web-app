@@ -47,11 +47,6 @@ class MessageController extends Controller
     }
 
     }
-
-    public function sendMsg(Request $request){
-        return Message::create($request->all())  ;
-    }
-
     
     public function index()
     {
@@ -97,11 +92,29 @@ class MessageController extends Controller
 
         // Update the response for the message
         $message->response = $request->input('message_response');
+        // Update the status to "replied"
+        $message->status = 'replied';
         $message->save();
 
         // Redirect back or to another page as needed
         return redirect()->route('all.messages')->with('message', 'Messsage Replied Successfully!');
     }
+
+    public function markAsUrgent($id)
+    {
+        $message = Message::find($id);
+        
+        if (!$message) {
+            return response()->json(['error' => 'Message not found'], 404);
+        }
+    
+        $message->priority = 1;
+        $message->save();
+    
+        return response()->json(['message' => 'Message marked as urgent'], 200);
+    }
+    
+    
     
 
 
