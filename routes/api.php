@@ -21,6 +21,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 
+//Route to Gett All Messages
+Route::get('/messages/get', [MessageController::class,'getMessages']);
 
-Route::get('/api/messages', [MessageController::class,'apiStore'])->name('messages.api.store');
-Route::post('/api/message/send', [MessageController::class, 'sendMessage']);
+//Route to create new message
+Route::post('/message/send', [MessageController::class, 'sendMessage']);

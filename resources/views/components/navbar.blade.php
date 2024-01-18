@@ -10,6 +10,10 @@
         <input class="form-control border-0" type="search" placeholder="Search">
     </form>
     <div class="navbar-nav align-items-center ms-auto">
+        <a href="/message" >
+            <i class="fa fa-keyboard me-lg-2"></i>
+            <span class="d-none d-lg-inline-flex">Send Message</span>
+        </a>
         <div class="nav-item dropdown">
             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                 <i class="fa fa-envelope me-lg-2"></i>

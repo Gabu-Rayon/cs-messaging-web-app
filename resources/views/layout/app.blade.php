@@ -27,9 +27,12 @@
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
+    {{-- <link href="{{ asset('assets/css/bootstrap-5.3.0.css') }}" rel="stylesheet"> --}}
 
     <!-- Template Stylesheet -->
     <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
+     <!-- DataTables Stylesheet -->
+    <link href="{{ asset('assets/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet">
 </head>
 
 <body>
@@ -99,9 +102,13 @@
     <script src="{{ asset('assets/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js') }}"></script>
 
     <!-- Template Javascript -->
-    <script src="js/main.js"></script>
     <script src="{{ asset('assets/js/main.js') }}"></script>
-
+    <script src="{{ asset('assets/js/dataTables.bootstrap5.min.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery.dataTables.min.js') }}"></script>
+    <script>
+        new DataTable('#example');
+    </script>
+    @yield('scripts')
 </body>
 
 </html>

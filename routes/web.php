@@ -22,10 +22,8 @@ Route::controller(MessageController::class)->group(function () {
     Route::get('/replied', 'replied')->name('replied.messages');
     Route::get('/waiting', 'waiting')->name('unreplied.messages');
     Route::get('/reply{messageId}', 'reply')->name('reply.message');
-
     //Agent Response routing
     Route::post('/store/{messageId}', 'store')->name('reply.store');
-    
     //customer messaging Routing
     Route::get('/message', 'showForm')->name('messaging.form');
     Route::post('/message/send', 'sendMessage')->name('send.message');

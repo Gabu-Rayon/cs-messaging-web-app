@@ -7,7 +7,7 @@
             <div class="col-lg-12 col-md-6 mt-4">
                 <div class="bg-light rounded h-100 p-4">
                     <h6 class="mb-4">Unreplied Messages</h6>
-                    <table class="table table-hover">
+                    <table class="table table-hover"  id="example">
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
