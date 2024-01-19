@@ -13,4 +13,10 @@ class Message extends Model
         'message_body',
         'response',
     ];
+
+
+    public function assignedUser(){
+        
+        return $this->belongsTo(User::class, 'agent_id');
+    }
 }

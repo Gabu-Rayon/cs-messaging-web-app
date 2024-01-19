@@ -10,18 +10,28 @@ class MessageController extends Controller
 {
    
       /*********
-       * Api EndPoint Get Test
+       * Api  EndPoint Postman Get test to get all messages
        */
     //   public function getMessages(){
     //     return Message::all();
     //   }
-    public function showForm()
-    {
+
+
+    
+     /*******
+       * web form  for sending Message
+       */
+    public function showForm(){
+        
         return view('messages.customer-messaging');
     }
+    
 
-    public function sendMessage(Request $request)
-    {
+      /*******
+       * User Controller to send Message via Postman Api endpoint
+       * & web form Also
+       */
+    public function sendMessage(Request $request){
         // Validate the request
         $request->validate([
             'user_id' => 'required',
@@ -32,6 +42,7 @@ class MessageController extends Controller
         $message = Message::create([
             'user_id' => $request->input('user_id'),
             'message_body' => $request->input('message_body'),
+            'status' => 'pending',  // Set status to "pending"
         ]);
 
         // You can return a response or redirect as needed
@@ -47,7 +58,12 @@ class MessageController extends Controller
     }
 
     }
-    
+     
+
+    /****8
+     * Method for Show All Messages
+     * All Agents
+     */
     public function index()
     {
         $messages = Message::all();
@@ -55,67 +71,159 @@ class MessageController extends Controller
     
         return view("messages.index")->with(compact('messages', 'users'));
     }
-    public function messages()
-    {
+
+    
+    /*****
+     * Method for Show All Messages and Agents in the Modal
+     */
+    public function messages(){
         $messages = Message::all();
-        return view("messages.messages", compact("messages"));
+        $users = User::all();
+        return view("messages.messages", compact("messages", "users"));
     }
+    
+
+    
+    /***
+     * Method for All Agents
+     */
     public function agents()
     {
 
         $users = User::all();
         return view("messages.agents", compact("users"));
     }
+
+    
+    /****
+     * Method for showing all replied Messages
+     */
     public function replied()
     {
-        $messages =  Message::whereNotNull('response')->get();
+        $messages = Message::where('status', 'replied')->get(['id', 'user_id', 'message_body', 'response']);
+
         return view("messages.replied", compact('messages'));
     }
-    public function waiting()
-    {
-        $messages = Message::whereNotNull('response')->get(['id', 'user_id', 'message_body', 'response']);
-        
 
-        return view("messages.unreplied", compact('messages'));
+    
+
+    /******
+     * Method for showing all unreplied Messages
+     */
+
+    public function waiting(){
+        
+    $messages = Message::where('status', 'pending')->get(['id', 'user_id', 'message_body', 'response']);
+
+    return view("messages.unreplied", compact('messages')); 
+    
     }
-    public function reply($messageId)
-    {
+
+
+    
+      /**
+       *Controller for showing Agent Message form to reply to message
+       */
+    
+    public function reply($messageId){
+        
         $message = Message::findOrFail($messageId);
     
         return view('messages.reply-message', ['message' => $message]);
     }
 
-    public function store(Request $request, $messageId)
-    {
+    
+
+    /******
+     * Method for Updating replied to message
+     */
+    public function store(Request $request, $messageId){
         
         $message = Message::findOrFail($messageId);
 
         // Update the response for the message
         $message->response = $request->input('message_response');
+        
         // Update the status to "replied"
         $message->status = 'replied';
         $message->save();
 
         // Redirect back or to another page as needed
         return redirect()->route('all.messages')->with('message', 'Messsage Replied Successfully!');
-    }
+    }    
+    
 
-    public function markAsUrgent($id)
-    {
-        $message = Message::find($id);
+      /**
+       * @Gabu-Rayon
+       * Method for marking Message Urgent
+       */
+      public function markAsUrgent($id){
         
-        if (!$message) {
-            return response()->json(['error' => 'Message not found'], 404);
-        }
-    
-        $message->priority = 1;
+        $message = Message::find($id);
+      
+        $message->priority = !$message->priority;
         $message->save();
+        return response()->json(['message' => 'Message priority updated', 'priority' => $message->priority], 200);
     
-        return response()->json(['message' => 'Message marked as urgent'], 200);
+     }
+      /*****
+       * method in your controller to handle agent assignment
+       */
+      
+   public function assignAgent(Request $request, $id) {
+    
+    $message = Message::find($id);
+    
+    if ($message->agent_id) {
+        return response()->json(['success' => false, 'message' => 'Message is already assigned to an agent']);
     }
+
     
+    $agentId = $request->input('agent_id');
+    $agent = User::find($agentId);
+
+    if (!$agent) {
+        return response()->json(['success' => false, 'message' => 'Agent not found']);
+    }
+
+    $message->agent_id = $agentId;
+    $message->save();
+
+    return response()->json(['success' => true, 'agent_name' => $agent->name]);
+}
+
+/*****
+ * method in your controller to get messages for a specific agent
+ */
+// public function getAgentMessages($agentId){
     
+//     //   $agent = User::findOrFail($agentId);
+
+//       // Retrieve messages assigned to a specific agent
+//      $agent = User::find($agentId);
+//      $assignedMessages = $agent->assignedMessages;
+
+//      // Retrieve the agent assigned to a specific message
+//     //  $message = Message::find($messageId);
+//     //  $assignedAgent = $message->assignedUser;
+
     
+//     $messages = $agent->assignedMessages;
+
+//     return view('messages.agents', compact('messages'));
+// }
 
 
+public function getAgentMessages($agentId){
+    // Retrieve the agent by ID
+    $agent = User::findOrFail($agentId);
+
+    // Retrieve messages assigned to the agent
+    $messages = $agent->assignedMessages;
+
+    return view('messages.agents', compact('messages'));
+}
+
+
+   
 }

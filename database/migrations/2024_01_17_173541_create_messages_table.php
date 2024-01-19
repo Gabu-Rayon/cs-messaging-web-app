@@ -14,11 +14,17 @@ return new class extends Migration
         Schema::create('messages', function (Blueprint $table) {
             $table->id();
             $table->string('user_id');
-            $table->text('message_body')->change();
-           $table->string('response')->nullable()->change();
-           $table->string('status')->default('pending'); 
-           $table->integer('priority')->default(0);       
+            $table->text('message_body');
+            $table->string('status')->default('pending')->nullable(); 
+            $table->boolean('priority')->default(0)->nullable(); 
+           $table->text('response')->nullable()->nullable(); 
+           $table->unsignedBigInteger('agent_id')->nullable();     
             $table->timestamps();
+
+        // Add a foreign key constraint
+        $table->foreign('agent_id')->references('id')->on('users')->onDelete('set null');
+
+
         });
     }
 
