@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 19, 2024 at 02:53 PM
+-- Generation Time: Jan 20, 2024 at 03:07 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -47,10 +47,10 @@ CREATE TABLE `messages` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `user_id` varchar(255) NOT NULL,
   `message_body` text NOT NULL,
-  `status` varchar(255) DEFAULT NULL,
-  `priority` tinyint(1) DEFAULT NULL,
-  `response` varchar(255) DEFAULT NULL,
-  `agent_id` bigint(20) DEFAULT NULL,
+  `status` varchar(255) DEFAULT 'pending',
+  `priority` tinyint(1) DEFAULT 0,
+  `response` text DEFAULT NULL,
+  `agent_id` bigint(20) UNSIGNED DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -60,16 +60,16 @@ CREATE TABLE `messages` (
 --
 
 INSERT INTO `messages` (`id`, `user_id`, `message_body`, `status`, `priority`, `response`, `agent_id`, `created_at`, `updated_at`) VALUES
-(1, '208', 'So it means if u pay ua loan before the due date is a disadvantage the last time I paid earlier it was stil', 'pending', 0, 'WE will get beck to you soon', NULL, NULL, '2024-01-19 10:10:48'),
-(2, '208', 'The dates of payment are still indicated n no money sent', 'replied', 0, 'Replied', NULL, NULL, '2024-01-19 10:10:40'),
-(3, '208', '  Why was my application rejected', 'replied', 0, 'These are main foru major keys', NULL, NULL, '2024-01-19 10:10:36'),
-(4, '208', ' Hi branch I requested my number to remain the one I was using there before 0720225243 I don\'t understand', 'replied', 0, 'will get update veryy soon', NULL, NULL, '2024-01-19 06:07:10'),
-(5, '218', 'I said ill pay 5th esther camoon.. Infact you guys took a week to give me a loan and just cant wait 4day', 'pending', 0, NULL, NULL, NULL, '2024-01-19 10:10:53'),
-(6, '218', 'I will pay on sunday of 5th and i will pay all the amount.. If that is allowed??', 'pending', 1, '', NULL, NULL, '2024-01-19 10:11:04'),
-(7, '218', ' I have a late source of salary i expected but i will pay next', 'pending', 1, '', NULL, NULL, '2024-01-19 10:11:07'),
-(8, '9444', ' I will clear my loan before 15nth,kindly bear with me.January was tough.', 'pending', 1, '', NULL, NULL, '2024-01-19 10:11:12'),
-(9, '9676', ' Hi can i get the batch number', 'pending', 1, '', NULL, NULL, '2024-01-19 10:11:14'),
-(10, '676', ' Hi can i get the batch number please !', 'pending', 1, '', NULL, NULL, '2024-01-19 10:11:18'),
+(1, '208', 'So it means if u pay ua loan before the due date is a disadvantage the last time I paid earlier it was stil', 'pending', 0, 'WE will get beck to you soon', NULL, NULL, '2024-01-19 07:10:48'),
+(2, '208', 'The dates of payment are still indicated n no money sent', 'replied', 0, 'Replied', NULL, NULL, '2024-01-19 07:10:40'),
+(3, '208', '  Why was my application rejected', 'replied', 0, 'These are main foru major keys', NULL, NULL, '2024-01-19 07:10:36'),
+(4, '208', ' Hi branch I requested my number to remain the one I was using there before 0720225243 I don\'t understand', 'replied', 0, 'will get update veryy soon', NULL, NULL, '2024-01-19 03:07:10'),
+(5, '218', 'I said ill pay 5th esther camoon.. Infact you guys took a week to give me a loan and just cant wait 4day', 'pending', 0, NULL, NULL, NULL, '2024-01-19 07:10:53'),
+(6, '218', 'I will pay on sunday of 5th and i will pay all the amount.. If that is allowed??', 'pending', 1, '', NULL, NULL, '2024-01-19 07:11:04'),
+(7, '218', ' I have a late source of salary i expected but i will pay next', 'pending', 1, '', NULL, NULL, '2024-01-19 07:11:07'),
+(8, '9444', ' I will clear my loan before 15nth,kindly bear with me.January was tough.', 'pending', 1, '', NULL, NULL, '2024-01-19 07:11:12'),
+(9, '9676', ' Hi can i get the batch number', 'pending', 1, '', NULL, NULL, '2024-01-19 07:11:14'),
+(10, '676', ' Hi can i get the batch number please !', 'pending', 1, '', NULL, NULL, '2024-01-19 07:11:18'),
 (11, '779', ' I Still not satisfied. I am still asking for a review. My number is 0723506931 or at least give me a clear ', 'pending', 0, '', NULL, NULL, NULL),
 (12, '779', ' My number is 0723506931. please have a review of my loan. I haven\'t defaulted and I have cleared my', 'pending', 0, '', NULL, NULL, NULL),
 (13, '779', ' Hi branch I have just cleared my loan which was due today but unfortunately you have denied me. I h', 'pending', 0, '', NULL, NULL, NULL),
@@ -178,11 +178,11 @@ CREATE TABLE `migrations` (
 --
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
-(5, '2014_10_12_000000_create_users_table', 1),
-(6, '2014_10_12_100000_create_password_reset_tokens_table', 1),
-(7, '2019_08_19_000000_create_failed_jobs_table', 1),
-(8, '2019_12_14_000001_create_personal_access_tokens_table', 1),
-(9, '2024_01_17_173541_create_messages_table', 2);
+(35, '2014_10_12_000000_create_users_table', 1),
+(36, '2014_10_12_100000_create_password_reset_tokens_table', 1),
+(37, '2019_08_19_000000_create_failed_jobs_table', 1),
+(38, '2019_12_14_000001_create_personal_access_tokens_table', 1),
+(39, '2024_01_17_173541_create_messages_table', 1);
 
 -- --------------------------------------------------------
 
@@ -259,7 +259,8 @@ ALTER TABLE `failed_jobs`
 -- Indexes for table `messages`
 --
 ALTER TABLE `messages`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `messages_agent_id_foreign` (`agent_id`);
 
 --
 -- Indexes for table `migrations`
@@ -302,13 +303,13 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=114;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=115;
 
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -321,6 +322,16 @@ ALTER TABLE `personal_access_tokens`
 --
 ALTER TABLE `users`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `messages`
+--
+ALTER TABLE `messages`
+  ADD CONSTRAINT `messages_agent_id_foreign` FOREIGN KEY (`agent_id`) REFERENCES `users` (`id`) ON DELETE SET NULL;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
