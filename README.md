@@ -6,18 +6,18 @@ application for Chatting that can scale with a company as they grow theiir custo
 The Web App covers this 
 
 I) messaging web application that  responses to incoming questions
-sent by  customers. The system  allows a team of agents to respond to incoming messages from (potentially many) customers in a streamlined fashion. 
-the system is design  so that multiple agents can log in at the same time and respond to incoming messages (authentication not  handled).
+   sent by  customers. The system  allows a team of agents to respond to incoming messages from (potentially many) customers in a streamlined fashion. 
+   the system is design  so that multiple agents can log in at the same time and respond to incoming messages (authentication not  handled).
 
-II)For testing  Customer sending Messages I have implement  an API endpoint which  issimulated via a  a postman collection also using simple web form 
+II) For testing  Customer sending Messages I have implemented  an API endpoint which  is simulated via a  a postman collection also I'm using simple web form 
 
-III)For Extra addition I have provided a SQL query containing tables queries showcasing how the database look like
+III) For Extra addition I have provided a SQL query containing tables queries showcasing how the database look like
 
-IV)The code as  Simple scheme that  help agents divide work amongst themselves, and to prevent multiple agents working on the same message at once.
+IV)  The code as  Simple scheme that  help agents divide work amongst themselves, and to prevent multiple agents working on the same message at once.
 
-V)The code as  Simple scheme that  helps Explore ways to surface messages that are more urgent and in need of immediate attention.
+V) The code as  Simple scheme that  helps Explore ways to surface messages that are more urgent and in need of immediate attention.
 
-VI)The code alsoImplement search functionality to allow agents to search over incoming messages and /or customer's attention.
+VI) The code alsoImplement search functionality to allow agents to search over incoming messages and /or customer's attention.
 
 Technology Used 
               
