@@ -1,6 +1,5 @@
 @extends('layout.app')
 @section('content')
-
    <!-- Table Start -->
     <div class="container-fluid pt-4 px-4">
         <div class="row g-4">
@@ -23,7 +22,7 @@
                                 <td>{{ $user->name }}</td>
                                 <td>{{ $user->email }}</td>
                                 <td>
-                                    <button class="btn btn-primary" onclick="openMessagesModal({{ $user->id }})">Messages</button>
+                                    <button class="btn btn-primary" onclick="openMessagesPage({{ $user->id }})">Messages</button>
                                 </td>
                             </tr>
                             @endforeach
@@ -35,25 +34,14 @@
     </div>
     <!-- Table End -->
 
-   <!-- Modal Showing Agents All their Messages Assign to them -->
-   @include('components.modals_agent_messages')
-   <!-- Modal Showing Agents All their Messages Assign to them  End -->
+@endsection
 
-    <script>
-        function openMessagesModal(agentId) {
-            $.ajax({
-                // url: "{{ route('agent.messages', ['agentId' => ':agentId']) }}".replace(':agentId', agentId),
-                url: "{{ url('/agent/messages/') }}/" + agentId,
-                method: 'GET',
-                success: function(response) {
-                    $('#messagesList').html(response.messages);
-                    $('#messagesModal').modal('show');
-                },
-                error: function(jqXHR, textStatus, errorThrown) {
-                    console.error('AJAX error:', textStatus, errorThrown);
-                    alert('An error occurred while fetching messages');
-                }
-            });
-        }
-    </script>
+@section('scripts')
+
+<script>
+    function openMessagesPage(agentId) {
+        window.location.href = "{{ url('/agent/messages/') }}/" + agentId;
+    }
+</script>   
+
 @endsection

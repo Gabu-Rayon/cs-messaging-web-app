@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Message;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class MessageController extends Controller
 {
    
-      /*********
+     /*******
+       * @Gabu-Rayon***
        * Api  EndPoint Postman Get test to get all messages
        */
     //   public function getMessages(){
@@ -18,7 +20,8 @@ class MessageController extends Controller
 
 
     
-     /*******
+    /*******
+       * @Gabu-Rayon*
        * web form  for sending Message
        */
     public function showForm(){
@@ -27,7 +30,8 @@ class MessageController extends Controller
     }
     
 
-      /*******
+     /*******
+       * @Gabu-Rayon*
        * User Controller to send Message via Postman Api endpoint
        * & web form Also
        */
@@ -79,21 +83,9 @@ class MessageController extends Controller
     public function messages(){
         $messages = Message::all();
         $users = User::all();
-        return view("messages.messages", compact("messages", "users"));
+        return view("messages.messages",compact("messages", "users"));
     }
-    
-
-    
-    /***
-     * Method for All Agents
-     */
-    public function agents()
-    {
-
-        $users = User::all();
-        return view("messages.agents", compact("users"));
-    }
-
+        
     
     /****
      * Method for showing all replied Messages
@@ -107,7 +99,8 @@ class MessageController extends Controller
 
     
 
-    /******
+   /*******
+       * @Gabu-Rayon
      * Method for showing all unreplied Messages
      */
 
@@ -118,8 +111,6 @@ class MessageController extends Controller
     return view("messages.unreplied", compact('messages')); 
     
     }
-
-
     
       /**
        *Controller for showing Agent Message form to reply to message
@@ -134,7 +125,8 @@ class MessageController extends Controller
 
     
 
-    /******
+   /*******
+       * @Gabu-Rayon
      * Method for Updating replied to message
      */
     public function store(Request $request, $messageId){
@@ -148,8 +140,10 @@ class MessageController extends Controller
         $message->status = 'replied';
         $message->save();
 
-        // Redirect back or to another page as needed
-        return redirect()->route('all.messages')->with('message', 'Messsage Replied Successfully!');
+        // Redirect back to the agent messages page
+       return Redirect::route('agent.messages', ['agentId' => $message->agent_id])->with('message', 'Message Replied Successfully!');
+ 
+
     }    
     
 
@@ -190,40 +184,26 @@ class MessageController extends Controller
     $message->save();
 
     return response()->json(['success' => true, 'agent_name' => $agent->name]);
-}
-
-/*****
- * method in your controller to get messages for a specific agent
- */
-// public function getAgentMessages($agentId){
+   }
+   /***
+     * Method for All Agents
+     */
     
-//     //   $agent = User::findOrFail($agentId);
-
-//       // Retrieve messages assigned to a specific agent
-//      $agent = User::find($agentId);
-//      $assignedMessages = $agent->assignedMessages;
-
-//      // Retrieve the agent assigned to a specific message
-//     //  $message = Message::find($messageId);
-//     //  $assignedAgent = $message->assignedUser;
-
+    public function agents(){
+    $users = User::with('assignedMessages')->get();
+    return view("messages.agents", compact("users"));
+    }
     
-//     $messages = $agent->assignedMessages;
-
-//     return view('messages.agents', compact('messages'));
-// }
-
-
-public function getAgentMessages($agentId){
-    // Retrieve the agent by ID
-    $agent = User::findOrFail($agentId);
-
-    // Retrieve messages assigned to the agent
-    $messages = $agent->assignedMessages;
-
-    return view('messages.agents', compact('messages'));
-}
-
+    /*****
+     *  method in your controller to get messages for a specific agent
+     * 
+     * */
+    
+    public function getAgentMessages($agentId){
+        
+    $agent = User::with('assignedMessages')->findOrFail($agentId);
+    return view('messages.agent-messages', compact('agent'));
+    }
 
    
 }

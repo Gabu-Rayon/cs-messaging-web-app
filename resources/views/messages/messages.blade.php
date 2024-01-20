@@ -89,8 +89,7 @@
                         @else
                             <option value="" disabled>No users available</option>
                         @endif
-                    </select>
-                    
+                    </select>                    
                     <button type="button" class="btn btn-success mt-3" onclick="assignAgent()">Assign</button>
                 </form>
             </div>
