@@ -1,5 +1,24 @@
 # CS Messaging web App
 
+In this project, I Have address the challenge of handling a high volume of customer inquiries
+while flagging the most urgent issues. The main objective I have built a simple messaging web
+application for Chatting that can scale with a company as they grow theiir customer base.
+The Web App covers this 
+
+I) messaging web application that  responses to incoming questions
+sent by  customers. The system  allows a team of agents to respond to incoming messages from (potentially many) customers in a streamlined fashion. 
+the system is design  so that multiple agents can log in at the same time and respond to incoming messages (authentication not  handled).
+
+II)For testing  Customer sending Messages I have implement  an API endpoint which  issimulated via a  a postman collection also using simple web form 
+
+III)For Extra addition I have provided a SQL query containing tables queries showcasing how the database look like
+
+IV)The code as  Simple scheme that  help agents divide work amongst themselves, and to prevent multiple agents working on the same message at once.
+
+V)The code as  Simple scheme that  helps Explore ways to surface messages that are more urgent and in need of immediate attention.
+
+VI)The code alsoImplement search functionality to allow agents to search over incoming messages and /or customer's attention.
+
 Technology Used 
               
                PHP-Laravel 
@@ -8,7 +27,7 @@ Technology Used
                JAVASCRIPT
                JQUERY
       
- Requirement
+ Requirements
     
            PHP >7.0*
            XAMPP 
@@ -47,7 +66,7 @@ SSH
 
             php artisan migrate 
 
-it will ask for the database name if not created  enter on
+it will ask for the database name if not created  enter one
 
 6.Run  this to serve you project and open 
 
