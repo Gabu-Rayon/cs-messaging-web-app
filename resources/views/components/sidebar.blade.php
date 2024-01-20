@@ -16,8 +16,7 @@
             </div>
         </div>
         <div class="navbar-nav w-100">
-            <a href="/" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
-            
+            <a href="/" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>            
             <a href="/messages" class="nav-item nav-link"><i class="fa fa-sms me-2"></i>Messages</a>
             <a href="/replied" class="nav-item nav-link"><i class="fa fa-comments me-2"></i>Responsed</a>
             <a href="/waiting" class="nav-item nav-link"><i class="fa fa-envelope"></i>Waiting Response</a>
