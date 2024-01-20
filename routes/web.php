@@ -43,7 +43,7 @@ Route::controller(MessageController::class)->group(function () {
     //Assign Agents
     Route::post('/assign/{id}', 'assignAgent')->name('assign.agent');
 
-    // Get MessagesAssign to Agent
+    // Get Messages Assign to Agent
     Route::get('/agent/messages/{agentId}', 'getAgentMessages')->name('agent.messages');
 
     
