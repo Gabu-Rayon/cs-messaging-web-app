@@ -11,7 +11,6 @@
                                 <table class="table"  id="example">
                                     <thead>
                                         <tr>
-                                            <th scope="col">#</th>
                                             <th scope="col">User Id</th>
                                             <th scope="col">Message Body</th>
                                             <th scope="col">Response</th>
@@ -23,7 +22,6 @@
                                     <tbody>
                                         @foreach($messages as $message)
                                             <tr>
-                                                <th scope="row">{{ $message->id }}</th>
                                                 <td>{{ $message->user_id }}</td>
                                                 <td>{{ $message->message_body }}</td>
                                                 <td>

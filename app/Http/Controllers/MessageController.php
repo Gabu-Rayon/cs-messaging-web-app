@@ -79,12 +79,14 @@ class MessageController extends Controller
     
     /*****
      * Method for Show All Messages and Agents in the Modal
-     */
+     */    
     public function messages(){
-        $messages = Message::all();
-        $users = User::all();
-        return view("messages.messages",compact("messages", "users"));
-    }
+    $messages = Message::orderBy('created_at', 'desc')->get();
+
+    $users = User::all();
+
+    return view("messages.messages", compact("messages", "users"));
+     }
         
     
     /****
